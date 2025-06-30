@@ -1,0 +1,27 @@
+name: Deploy to Azure VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run deploy script over SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 74.163.82.56   # <== TROQUE PELO SEU IP se necessário
+          username: Davi
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/Davi/chat_websocket
+            git pull origin main
+            npm install
+            npx tsc
+            pm2 restart chat || pm2 start dist/server.js --name chat
