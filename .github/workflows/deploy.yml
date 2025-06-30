@@ -16,9 +16,9 @@ jobs:
       - name: Run deploy script over SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: 74.163.82.56   # <== TROQUE PELO SEU IP se necessário
+          host: 74.163.82.56
           username: Davi
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd /home/Davi/chat_websocket
             git pull origin main
