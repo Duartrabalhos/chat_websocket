@@ -7,13 +7,14 @@
   "scripts": {
     "build": "tsc",
     "start": "node --env-file=.env ./dist/server.js",
-    "dev": "tsx watch --env-file=.env.dev ./src/server.ts",
+    "dev": "tsx watch ./src/server.ts",
     "migration:generate": "typeorm-ts-node-esm migration:generate -d src/database/data-source.ts",
     "migration:run": "typeorm-ts-node-esm migration:run -d src/database/data-source.ts"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.0",

@@ -4,9 +4,13 @@ import { Wss } from './socket/wss';
 import { DataSource } from './database/connection';
 import app from './app';
 import RoomManager from './domain/RoomManager';
+import dotenv from "dotenv";
 
+
+dotenv.config({ path: ".env.dev" });
 const server = createServer(app);
-
+console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
+console.log("DB_USER:", process.env.DB_USER);
 DataSource.initialize()
   .then(() => {
     console.log('Database connected');
