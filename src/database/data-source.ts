@@ -4,7 +4,7 @@ export const AppDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'postgres',
+  username: 'chatuser',
   password: 'postgres',
   database: 'wschat',
   synchronize: false,
