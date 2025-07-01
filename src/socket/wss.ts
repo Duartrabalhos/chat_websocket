@@ -20,10 +20,25 @@ Wss.on('connection', ws => {
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'ws.worker.js')
   );
 
-  ws.on('message', message => {
-    const parseMessage: IWebSocketMessage = JSON.parse(message.toString());
+  ws.on('message', (message) => {
+    let parseMessage: IWebSocketMessage;
+
+    try {
+      parseMessage = JSON.parse(message.toString());
+    } catch (error) {
+      console.error('Invalid JSON received:', message.toString());
+      ws.send(
+        JSON.stringify({
+          type: 'error',
+          message: 'Invalid JSON format'
+        })
+      );
+      return;
+    }
+
     worker.postMessage(parseMessage);
   });
+
 
   worker.on('message', msg => {
     if (msg.action === 'enter_room') {
