@@ -23,7 +23,7 @@ DataSource.initialize()
     });
 
     server.listen(process.env.PORT, () => {
-      console.log(`server running on http://localhost:${process.env.PORT}`);
+      console.log(`server running on http://0.0.0.0:${process.env.PORT}`);
     });
   })
   .catch(err => console.log(err));

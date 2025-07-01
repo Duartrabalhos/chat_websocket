@@ -1,6 +1,6 @@
 import { WebSocket } from 'ws';
 
-const ws = new WebSocket('ws://localhost:3333');
+const ws = new WebSocket('ws://davizeira.eduardodev.com.br/');
 
 const messages = [
   'Olá servidor',
