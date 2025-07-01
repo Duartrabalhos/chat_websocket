@@ -26,4 +26,4 @@ DataSource.initialize()
       console.log(`server running on http://0.0.0.0:${process.env.PORT}`);
     });
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err)); 
