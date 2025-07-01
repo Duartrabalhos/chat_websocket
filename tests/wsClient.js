@@ -2,7 +2,7 @@ import { WebSocket } from 'ws';
 
 const ws = new WebSocket('ws://davizeira.eduardodev.com.br/');
 
-const messages = [
+const messages = [ 
   'Olá servidor',
   'Como estás',
   'teste de mensagem para o servidor',
