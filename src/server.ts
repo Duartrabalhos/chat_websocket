@@ -6,7 +6,7 @@ import app from './app';
 import RoomManager from './domain/RoomManager';
 import dotenv from "dotenv";
 
-
+const port = process.env.PORT || 3000;
 dotenv.config({ path: ".env.dev" });
 const server = createServer(app);
 console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
@@ -22,8 +22,8 @@ DataSource.initialize()
       });
     });
 
-    server.listen(process.env.PORT, () => {
-      console.log(`server running on http://0.0.0.0:${process.env.PORT}`);
-    });
+    server.listen(port, () => {
+    console.log(`server running on http://0.0.0.0:${port}`);
+  });
   })
   .catch(err => console.log(err)); 
