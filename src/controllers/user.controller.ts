@@ -79,10 +79,41 @@ class UserController {
     });
   };
 
-  // TODO: implement user update fields (optional)
+  
   public update: RequestHandler = async (request, response) => {
-    response.send({ message: 'user info updated' });
-  };
+  const userSchema = z.object({
+    name: z.string().optional(),
+    email: z.string().email().optional()
+  });
+
+  const result = userSchema.safeParse(request.body);
+
+  if (!result.success) {
+    throw new HttpErrorResponse(400, 'Dados inválidos', result.error);
+  }
+
+  const userId = (request as any).user?.id; 
+
+  if (!userId) {
+    throw new HttpErrorResponse(401, 'Não autorizado', null);
+  }
+
+  // Procura o usurio no banco
+  const user = await this.repository.findOne({ where: { id: userId } });
+
+  if (!user) {
+    throw new HttpErrorResponse(404, 'Usuário não encontrado', null);
+  }
+
+  // atualiza os campos do usuário
+  if (result.data.name) user.name = result.data.name;
+  if (result.data.email) user.email = result.data.email;
+
+  // Salva os dados no banco
+  await this.repository.save(user);
+
+  response.send({ message: 'Usuário atualizado com sucesso.' });
+};
 }
 
 export default UserController;
